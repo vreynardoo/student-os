@@ -5,10 +5,11 @@ import { listTasksForUser, type TaskWithCourse } from "@/lib/services/task-servi
 import { listSchedulesForUser, type ScheduleWithCourse } from "@/lib/services/schedule-service";
 import { computeDashboardData } from "@/lib/dashboard/compute-dashboard-data";
 import { formatDueDate } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { LEVEL_BADGE_VARIANT } from "@/app/(app)/tasks/task-row";
+
 
 function getGreeting(now: Date): string {
   const hour = now.getHours();
@@ -90,13 +91,15 @@ export default async function DashboardPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">Quick Actions</h2>
             <div className="flex flex-col gap-2">
-              <Button render={<Link href="/tasks" />}>Add Task</Button>
-              <Button variant="outline" render={<Link href="/courses" />}>
+              <Link href="/tasks" className={buttonVariants({ variant: "default" })}>
+                Add Task
+              </Link>
+              <Link href="/courses" className={buttonVariants({ variant: "outline" })}>
                 Add Course
-              </Button>
-              <Button variant="outline" render={<Link href="/schedule" />}>
+              </Link>
+              <Link href="/schedule" className={buttonVariants({ variant: "outline" })}>
                 View Schedule
-              </Button>
+              </Link>
             </div>
           </section>
         </div>

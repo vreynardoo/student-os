@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { MarkdownLite } from "./markdown-lite";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
@@ -80,18 +81,20 @@ export function AdvisorChat() {
             Ask about your tasks, deadlines, and study priorities to get started.
           </p>
         ) : (
-          messages.map((message, index) => (
-            <div
-              key={index}
-              className={
-                message.role === "user"
-                  ? "max-w-[85%] self-end rounded-lg bg-primary px-3 py-2 text-sm whitespace-pre-wrap text-primary-foreground"
-                  : "max-w-[85%] self-start rounded-lg bg-muted px-3 py-2 text-sm whitespace-pre-wrap"
-              }
-            >
-              {message.content}
-            </div>
-          ))
+          messages.map((message, index) =>
+            message.role === "user" ? (
+              <div
+                key={index}
+                className="max-w-[85%] self-end rounded-lg bg-primary px-3 py-2 text-sm whitespace-pre-wrap text-primary-foreground"
+              >
+                {message.content}
+              </div>
+            ) : (
+              <div key={index} className="max-w-[95%] self-start rounded-lg bg-muted px-3 py-2 text-sm">
+                <MarkdownLite content={message.content} />
+              </div>
+            ),
+          )
         )}
         {isSending && <p className="self-start text-sm text-muted-foreground">Thinking...</p>}
         {error && <p className="self-start text-sm text-destructive">{error}</p>}

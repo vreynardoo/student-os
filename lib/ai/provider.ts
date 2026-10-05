@@ -14,5 +14,5 @@ export function getAIProvider(): AIProvider {
   if (!apiKey) {
     throw new AIProviderUnavailableError("GEMINI_API_KEY is not set.");
   }
-  return new GeminiProvider(apiKey, process.env.GEMINI_MODEL);
+  return new GeminiProvider(apiKey);
 }
