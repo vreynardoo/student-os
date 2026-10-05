@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatDueDate } from "@/lib/utils";
 import { TaskDialog } from "./task-dialog";
 
 // Not `RankedTask` itself — that type's `task` field is the engine's minimal
@@ -17,16 +18,14 @@ import { TaskDialog } from "./task-dialog";
 // etc.) alongside the computed priority, so it's paired up at the page level.
 export type RankedTaskWithCourse = { task: TaskWithCourse; priority: PriorityResult };
 
-const LEVEL_BADGE_VARIANT = {
+// Exported so other views showing priority results (e.g. the dashboard) use
+// the same level-to-badge-color mapping instead of redefining it.
+export const LEVEL_BADGE_VARIANT = {
   CRITICAL: "destructive",
   HIGH: "default",
   MEDIUM: "secondary",
   LOW: "outline",
 } as const;
-
-function formatDueDate(date: Date): string {
-  return new Date(date).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
-}
 
 export function TaskRow({ ranked, courses }: { ranked: RankedTaskWithCourse; courses: Course[] }) {
   const router = useRouter();
