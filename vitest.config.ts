@@ -6,7 +6,7 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["**/*.test.ts"],
-    exclude: ["node_modules", ".next"],
+    exclude: ["node_modules", ".next", "**/*.integration.test.ts"],
     env: {
       // Dummy values so modules that assert these exist can load in tests.
       // Not real credentials — no test ever opens a connection with these.
