@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: "/courses", label: "Courses" },
   { href: "/schedule", label: "Schedule" },
   { href: "/tasks", label: "Tasks" },
+  { href: "/advisor", label: "Advisor" },
 ];
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
